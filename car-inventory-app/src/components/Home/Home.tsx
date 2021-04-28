@@ -65,7 +65,7 @@ export const Home = (props:Props) => {
 
     return (
         <div className = {classes.root}>
-        <nav>
+        {<nav>
             <div className={classes.navbar_container}>
                 <h1 className={classes.logo}>
                     <Link to="#" className={`${classes.logo_a} ${classes.logo_navigation}`}>{props.title}</Link>
@@ -85,7 +85,7 @@ export const Home = (props:Props) => {
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav>}
         <main className={classes.main}>
             <div className={classes.main_text}>
             <h1>{props.title}</h1>
