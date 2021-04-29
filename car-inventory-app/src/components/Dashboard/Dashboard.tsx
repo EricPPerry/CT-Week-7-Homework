@@ -13,7 +13,12 @@ import {Drawer as MUIDrawer,
     Typography,
     Divider,
     Button,
-    createStyles
+    createStyles,
+    Dialog,
+    DialogActions, 
+    DialogContent, 
+    DialogContentText, 
+    DialogTitle
 } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -21,7 +26,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
 import {RouteComponentProps, withRouter, Switch, Route} from 'react-router-dom';
-import {DataTable} from '../../components';
+import {DataTable, CarForm} from '../../components';
 
 
 const drawerWidth = 220;
@@ -105,6 +110,8 @@ export const Dashboard = withRouter( (props:DashProps) => {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
 
+    const [dialogOpen, setDialogOpen] = useState(false);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -112,6 +119,15 @@ export const Dashboard = withRouter( (props:DashProps) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    // Handle Dialog Open/Close
+    const handleDialogClickOpen = () => {
+        setDialogOpen(true);
+    }
+
+    const handleDialogClickClose = () => {
+        setDialogOpen(false);
+    }
 
     const itemsList = [
         {
@@ -137,7 +153,21 @@ export const Dashboard = withRouter( (props:DashProps) => {
                         <MenuIcon />
                     </IconButton>
                 <Typography>Garage Navigation</Typography>
-                <Button className={classes.toolbar_button}>Enter a New Car To Collection</Button>
+                <Button className={classes.toolbar_button} onClick={handleDialogClickOpen}>Create New Car</Button>
+
+          {/*Dialog Pop Up begin */}
+                <Dialog open={dialogOpen} onClose={handleDialogClickClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Add New Car</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Add A New Car</DialogContentText>
+                    <CarForm />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick = {handleDialogClickClose} color="primary">Cancel</Button>
+                    <Button onClick={handleDialogClickClose} color = "primary">Done</Button> 
+                </DialogActions>
+
+                </Dialog>
 
                 </Toolbar>
 
